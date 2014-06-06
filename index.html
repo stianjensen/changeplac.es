@@ -7,7 +7,7 @@
     <h1 id=changeplaceholder></h1>
 <script>
 function parseURL(url) {
-    var path = url.match(/.*\/([a-z0-9\.]+)\/.*/);
+    var path = url.match(/.*\/([0-9]+)\/.*/);
     if (path) {
         return +path[1];
     } else {
