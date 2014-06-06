@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<title>Change plac.es</title>
+</head>
+<body>
+    <h1 id=changeplaceholder></h1>
+<script>
+function parseURL(url) {
+    var path = url.match(/.*\/([a-z0-9\.]+)\/.*/);
+    if (path) {
+        return +path[1];
+    } else {
+        return 300;
+    }
+}
+
+(function(){
+    var interval = parseURL(window.location.href);
+    document.getElementById("changeplaceholder").innerText = interval;
+    setInterval(function(){
+        console.log("Chaaaaange places!");
+    }, interval*1000);
+})();
+</script>
+</body>
+</html>
