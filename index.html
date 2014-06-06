@@ -2,25 +2,41 @@
 <html>
 <head>
 <title>Change plac.es</title>
+<link rel=stylesheet type=text/css href=style.css>
 </head>
 <body>
+    <h1 id=timeplaceholder></h1>
     <h1 id=changeplaceholder></h1>
+    <audio src="change_places.mp3" id=change_places_sound></audio>
 <script>
 function parseURL(url) {
     var path = url.match(/.*\/([0-9]+)\/.*/);
     if (path) {
         return +path[1];
     } else {
-        return 300;
+        return 10;
     }
 }
 
 (function(){
+    var change_places_sound = document.getElementById('change_places_sound');
     var interval = parseURL(window.location.href);
-    document.getElementById("changeplaceholder").innerText = interval;
+    var change_label = document.getElementById('changeplaceholder');
+    var time_label = document.getElementById('timeplaceholder');
+    var remaining_time = interval;
     setInterval(function(){
-        console.log("Chaaaaange places!");
-    }, interval*1000);
+        remaining_time--;
+        time_label.innerText = remaining_time;
+        if (remaining_time == 0) {
+            remaining_time = interval;
+            change_places_sound.currentTime = 0;
+            change_places_sound.play();
+            change_label.innerText = 'Chaaaaange places';
+            setTimeout(function(){
+                change_label.innerText = "";
+            }, 6000);
+        }
+    }, 1000);
 })();
 </script>
 </body>

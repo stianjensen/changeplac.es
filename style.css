@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: helvetica, arial;
+    background-color: #456789;
+    color: white;
+    text-align: center;
+    margin-top: 150px;
+    font-size: 5em;
+}
