@@ -10,7 +10,7 @@
     <audio src="/change_places.mp3" id=change_places_sound></audio>
 <script>
 function parseURL(url) {
-    var path = url.match(/.*\/([0-9]+)\/.*/);
+    var path = url.match(/.*\/([0-9]+)\/?.*/);
     if (path) {
         return +path[1];
     } else {
