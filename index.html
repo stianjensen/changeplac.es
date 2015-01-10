@@ -23,12 +23,12 @@ function parseURL(url) {
     var interval = parseURL(window.location.href);
     var change_label = document.getElementById('changeplaceholder');
     var time_label = document.getElementById('timeplaceholder');
-    var remaining_time = interval;
+    var end_time = Date.now() + interval * 1000;
     setInterval(function(){
-        remaining_time--;
-        time_label.innerText = remaining_time;
-        if (remaining_time == 0) {
-            remaining_time = interval;
+        var delta = Math.round((end_time - Date.now()) / 1000);
+        time_label.innerText = delta;
+        if (delta <= 0) {
+            end_time = Date.now() + interval * 1000;
             change_places_sound.currentTime = 0;
             change_places_sound.play();
             change_label.innerText = 'Chaaaaange places';
