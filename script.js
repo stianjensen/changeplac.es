@@ -12,15 +12,17 @@ function parseURL(url) {
     var interval = parseURL(window.location.href);
     var change_label = document.getElementById('changeplaceholder');
     var time_label = document.getElementById('timeplaceholder');
+    var title_tag = document.getElementsByTagName('title')[0];
     var end_time = Date.now() + interval * 1000;
     setInterval(function(){
         var delta = Math.round((end_time - Date.now()) / 1000);
         time_label.textContent = delta;
+        title_tag.textContent = delta + " – Change plac.es";
         if (delta <= 0) {
             end_time = Date.now() + interval * 1000;
             change_places_sound.currentTime = 0;
             change_places_sound.play();
-            change_label.textContent = 'Chaaaaange places';
+            title_tag.textContent = change_label.textContent = 'Chaaaaange places';
             setTimeout(function(){
                 change_label.textContent = "";
             }, 6000);
