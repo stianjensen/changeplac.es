@@ -23,9 +23,20 @@ function parseURL(url) {
             change_places_sound.currentTime = 0;
             change_places_sound.play();
             title_tag.textContent = change_label.textContent = 'Chaaaaange places';
+            if (settings.get('alertsEnabled')) {
+                alert('Change places!');
+            }
             setTimeout(function(){
                 change_label.textContent = "";
             }, 6000);
         }
     }, 1000);
+
+    var alertsEnabledControl = document.getElementById('alerts-enabled');
+    if (settings.get('alertsEnabled')) {
+        alertsEnabledControl.checked = true;
+    }
+    alertsEnabledControl.addEventListener('change', function(e) {
+        settings.set('alertsEnabled', alertsEnabledControl.checked);
+    });
 })();
