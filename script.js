@@ -15,14 +15,14 @@ function parseURL(url) {
     var end_time = Date.now() + interval * 1000;
     setInterval(function(){
         var delta = Math.round((end_time - Date.now()) / 1000);
-        time_label.innerText = delta;
+        time_label.textContent = delta;
         if (delta <= 0) {
             end_time = Date.now() + interval * 1000;
             change_places_sound.currentTime = 0;
             change_places_sound.play();
-            change_label.innerText = 'Chaaaaange places';
+            change_label.textContent = 'Chaaaaange places';
             setTimeout(function(){
-                change_label.innerText = "";
+                change_label.textContent = "";
             }, 6000);
         }
     }, 1000);
