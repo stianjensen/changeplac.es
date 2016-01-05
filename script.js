@@ -1,15 +1,27 @@
 function parseURL(url) {
-    var path = url.match(/.*\/([0-9]+)\/?.*/);
+    var path = url.split('/');
     if (path) {
-        return +path[1];
+        return parseTime(path[1]);
     } else {
         return 300;
     }
 }
 
+function parseTime(time) {
+  if (isNaN(time)) {
+    var re = /(?:(\d{1,2})h)?(?:(\d{1,2})m)?(?:(\d{1,2})s)?/;
+    var result = re.exec(time);
+    return (3600 * (+result[1] || 0)) +
+        (60 * (+result[2] || 0)) +
+        (+result[3] || 0);
+  } else {
+    return +time;
+  }
+}
+
 (function(){
     var change_places_sound = document.getElementById('change_places_sound');
-    var interval = parseURL(window.location.href);
+    var interval = parseURL(window.location.pathname);
     var change_label = document.getElementById('changeplaceholder');
     var time_label = document.getElementById('timeplaceholder');
     var title_tag = document.getElementsByTagName('title')[0];
