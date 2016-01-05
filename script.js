@@ -1,9 +1,11 @@
 function parseURL(url) {
-  var path = url.split('/');
-  if (path) {
-    return path.slice(1).map(parseTime);
+  var path = url.slice(1).split('/').filter(function(item) {
+    return !!item;
+  });
+  if (path.length > 0) {
+    return path.map(parseTime);
   } else {
-    return 300;
+    return [300];
   }
 }
 
