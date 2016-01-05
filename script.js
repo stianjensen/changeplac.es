@@ -1,7 +1,7 @@
 function parseURL(url) {
   var path = url.split('/');
   if (path) {
-    return parseTime(path[1]);
+    return path.slice(1).map(parseTime);
   } else {
     return 300;
   }
@@ -26,13 +26,15 @@ function parseTime(time) {
   var title_tag = document.getElementsByTagName('title')[0];
 
   var interval = parseURL(window.location.pathname);
-  var end_time = Date.now() + interval * 1000;
+  var counter = 0;
+  var end_time = Date.now() + interval[counter] * 1000;
   setInterval(function(){
     var delta = Math.round((end_time - Date.now()) / 1000);
     time_label.textContent = delta;
     title_tag.textContent = delta + " – Change plac.es";
     if (delta <= 0) {
-      end_time = Date.now() + interval * 1000;
+      counter = (counter + 1) % interval.length;
+      end_time = Date.now() + interval[counter] * 1000;
       change_places_sound.currentTime = 0;
       change_places_sound.play();
       title_tag.textContent = change_label.textContent = 'Chaaaaange places';
