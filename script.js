@@ -21,6 +21,23 @@ function parseTime(time) {
   }
 }
 
+function formatTime(time) {
+  var seconds = time % 60;
+  var minutes = ((time % 3600) / 60) | 0;
+  var hours = (time / 3600) | 0;
+  var output = '';
+  if (hours > 0) {
+    output += hours + 'h';
+  }
+  if (minutes > 0) {
+    output += minutes + 'm';
+  }
+  if (seconds > 0) {
+    output += seconds + 's';
+  }
+  return output || '0';
+}
+
 (function(){
   var change_places_sound = document.getElementById('change_places_sound');
   var change_label = document.getElementById('changeplaceholder');
@@ -35,8 +52,8 @@ function parseTime(time) {
     if (delta < 0) {
       delta = 0;
     }
-    time_label.textContent = delta;
-    title_tag.textContent = delta + " – Change plac.es";
+    time_label.textContent = formatTime(delta);
+    title_tag.textContent = formatTime(delta) + " – Change plac.es";
     if (delta <= 0) {
       counter = (counter + 1) % interval.length;
       change_places_sound.currentTime = 0;
