@@ -32,17 +32,20 @@ function parseTime(time) {
   var end_time = Date.now() + interval[counter] * 1000;
   setInterval(function(){
     var delta = Math.round((end_time - Date.now()) / 1000);
+    if (delta < 0) {
+      delta = 0;
+    }
     time_label.textContent = delta;
     title_tag.textContent = delta + " – Change plac.es";
     if (delta <= 0) {
       counter = (counter + 1) % interval.length;
-      end_time = Date.now() + interval[counter] * 1000;
       change_places_sound.currentTime = 0;
       change_places_sound.play();
       title_tag.textContent = change_label.textContent = 'Chaaaaange places';
       if (settings.get('alertsEnabled')) {
         alert('Change places!');
       }
+      end_time = Date.now() + interval[counter] * 1000;
       setTimeout(function(){
         change_label.textContent = "";
       }, 6000);
