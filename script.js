@@ -44,7 +44,7 @@ function formatTime(time) {
   var time_label = document.getElementById('timeplaceholder');
   var title_tag = document.getElementsByTagName('title')[0];
 
-  var interval = parseURL(window.location.pathname);
+  var interval = parseURL(window.location.hash);
   var counter = 0;
   var end_time = Date.now() + interval[counter] * 1000;
   setInterval(function(){
